@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликер смайликов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Кликер смайликов 😀</h1>
+            <div class="replica" id="replica"></div>
+            <div class="stats">
+                <div class="stat">Смайлики: <span id="smileys">100</span></div>
+                <div class="stat">Доллары: $<span id="dollars">0</span></div>
+                <div class="stat">Смайликов/клик: <span id="smileys-per-click">1</span></div>
+                <div class="stat">Пассивный доход: <span id="passive-income">0</span>/сек</div>
+                <div class="stat">Осколки дубликата: <span id="duplicate-shards">0</span></div>
+                <div class="stat">Осколки мастерства: <span id="mastery-shards">0</span></div>
+            </div>
+        </header>
+        
+        <div class="clicker-area">
+            <div class="smiley" id="main-smiley">😀</div>
+            <div class="click-info">Кликните на смайлик!</div>
+            <div class="league-info">Текущая лига: <span id="current-league">Бронза</span></div>
+            <div class="click-counter">Кликов до следующей лиги: <span id="clicks-to-next">5000</span></div>
+        </div>
+        
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-tab="upgrades">Улучшения</button>
+                <button class="tab" data-tab="cases">Кейсы</button>
+                <button class="tab" data-tab="shop">Магазин эмоций</button>
+                <button class="tab" data-tab="exchange">Обменник</button>
+                <button class="tab" data-tab="inventory">Инвентарь</button>
+                <button class="tab" data-tab="leagues">Лиги</button>
+                <button class="tab" data-tab="master-temple">Храм мастера</button>
+                <button class="tab" data-tab="info">Инфо</button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="tab-content active" id="upgrades-tab">
+                <h2>Улучшения</h2>
+                <div class="upgrades-grid" id="upgrades-grid">
+                    <!-- Улучшения будут добавляться через JS -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="cases-tab">
+                <h2>Кейсы</h2>
+                <div class="cases-grid" id="cases-grid">
+                    <!-- Кейсы будут добавляться через JS -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="shop-tab">
+                <h2>Магазин эмоций</h2>
+                <div class="shop-grid" id="shop-grid">
+                    <!-- Эмоции будут добавляться через JS -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="exchange-tab">
+                <h2>Обменник</h2>
+                <div class="exchange-area">
+                    <p>Курс обмена: 100 смайликов = 1 доллар</p>
+                    <input type="number" class="exchange-input" id="exchange-amount" placeholder="Количество смайликов" min="100" step="100">
+                    <button class="exchange-btn" id="exchange-btn">Обменять</button>
+                    <p id="exchange-result"></p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="inventory-tab">
+                <h2>Инвентарь</h2>
+                <div class="inventory-grid" id="inventory-grid">
+                    <!-- Инвентарь будет заполняться через JS -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="leagues-tab">
+                <h2>Система лиг</h2>
+                <div class="leagues-content">
+                    <div class="current-league">
+                        <h3>Текущая лига: <span id="league-name">Бронза</span></h3>
+                        <div class="league-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="league-progress"></div>
+                            </div>
+                            <div class="progress-text" id="league-progress-text">0/5000 кликов</div>
+                        </div>
+                    </div>
+                    
+                    <div class="leagues-list">
+                        <h3>Все лиги:</h3>
+                        <div class="league-item active" data-league="bronze">
+                            <span class="league-icon">🥉</span>
+                            <span class="league-name">Бронза</span>
+                            <span class="league-req">0 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="silver">
+                            <span class="league-icon">🥈</span>
+                            <span class="league-name">Серебро</span>
+                            <span class="league-req">5000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="gold">
+                            <span class="league-icon">🥇</span>
+                            <span class="league-name">Золото</span>
+                            <span class="league-req">15000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="ruby">
+                            <span class="league-icon">🔴</span>
+                            <span class="league-name">Рубин</span>
+                            <span class="league-req">30000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="sapphire">
+                            <span class="league-icon">🔵</span>
+                            <span class="league-name">Сапфир</span>
+                            <span class="league-req">50000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="amethyst">
+                            <span class="league-icon">🟣</span>
+                            <span class="league-name">Аметист</span>
+                            <span class="league-req">75000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="emerald">
+                            <span class="league-icon">💚</span>
+                            <span class="league-name">Изумруд</span>
+                            <span class="league-req">100000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="diamond">
+                            <span class="league-icon">💎</span>
+                            <span class="league-name">Алмаз</span>
+                            <span class="league-req">1500000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="platinum">
+                            <span class="league-icon">👑</span>
+                            <span class="league-name">Платина</span>
+                            <span class="league-req">20000000 кликов</span>
+                        </div>
+                        <div class="league-item" data-league="obsidian">
+                            <span class="league-icon">⚫</span>
+                            <span class="league-name">Обсидиан</span>
+                            <span class="league-req">300000000 кликов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="master-temple-tab">
+                <h2>Храм мастера</h2>
+                <div class="temple-content">
+                    <div class="temple-stats">
+                        <p>Ваши осколки мастерства: <strong id="temple-mastery-shards">0</strong></p>
+                    </div>
+                    
+                    <div class="temple-shop">
+                        <h3>Улучшения за осколки мастерства</h3>
+                        <div class="temple-items">
+                            <div class="temple-item">
+                                <div class="temple-icon">⚡</div>
+                                <div class="temple-name">Мастерский клик</div>
+                                <div class="temple-desc">+10 смайликов за клик</div>
+                                <div class="temple-cost">10 осколков мастерства</div>
+                                <button class="buy-btn temple-buy-btn" data-item="master-click">Купить</button>
+                            </div>
+                        </div>
+                        
+                        <h3>Эмоции за осколки мастерства</h3>
+                        <div class="temple-items">
+                            <div class="temple-item">
+                                <div class="temple-icon">🌟</div>
+                                <div class="temple-name">Звезда мастера</div>
+                                <div class="temple-desc">Эксклюзивная эмоция</div>
+                                <div class="temple-cost">25 осколков мастерства</div>
+                                <button class="buy-btn temple-buy-btn" data-item="master-star">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="info-tab">
+                <h2>Информация об игре</h2>
+                <div class="info-content">
+                    <h3>Как играть:</h3>
+                    <p>Кликайте на смайлик, чтобы зарабатывать смайлики. Покупайте улучшения для увеличения дохода.</p>
+                    
+                    <h3>Улучшения:</h3>
+                    <p>Каждое улучшение увеличивает стоимость на 15% после покупки.</p>
+                    
+                    <h3>Кейсы:</h3>
+                    <p>Открывайте кейсы, чтобы получать случайные эмоции для своего инвентаря.</p>
+                    
+                    <h3>Осколки дубликата:</h3>
+                    <p>Получайте за повторные эмоции из кейсов. 50 осколков можно обменять на эмоцию 🫂.</p>
+                    
+                    <h3>Система лиг:</h3>
+                    <p>Прокачивайте лиги, делая клики. За каждую новую лигу получайте 10 осколков мастерства.</p>
+                    
+                    <h3>Уровни эмоций:</h3>
+                    <p>Каждая эмоция имеет свой уровень. За 100 уровень на любой эмоции получайте 1 осколок мастерства.</p>
+                    
+                    <h3>Храм мастера:</h3>
+                    <p>Покупайте эксклюзивные улучшения и эмоции за осколки мастерства.</p>
+                    
+                    <h3>Обменник:</h3>
+                    <p>Обменивайте смайлики на доллары по курсу 100:1.</p>
+                    
+                    <h3>Античит система:</h3>
+                    <p>Игра отслеживает использование автокликеров. При обнаружении читов игра блокируется на 5 минут.</p>
+                    
+                    <h3>Реплики:</h3>
+                    <p>Реплики меняются каждые 10 секунд. Некоторые реплики могут давать бонусы!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    <div class="anti-cheat-warning" id="anti-cheat-warning">
+        <h2>Обнаружен автокликер!</h2>
+        <p>Игра заблокирована на 5 минут</p>
+        <div class="cheat-timer" id="cheat-timer">05:00</div>
+        <p>Пожалуйста, не используйте сторонние программы для игры</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+                  </html>
